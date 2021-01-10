@@ -22,12 +22,12 @@ Summy merupakan proyek yang dilakukan untuk memenuhi syarat lulus Program Studi 
 * Install Xna Game Studio 4.0 Platform Tools
 * Install Xna Game Studio 4.0 Shared
 * Install XNA Game Studio 4.0.vsix
-* [Download XNA For Visual Studio 2015 Here](https://mxa.codeplex.com/releases/view/618279)
+* [Download XNA For Visual Studio 2015 Here](https://flatredball.com/visual-studio-2019-xna-setup/)
 
 
 ### Who do I talk to? ###
 
-[rhbayuprabowo](https://www.linkedin.com/in/rh-bayu-prabowo)
+[rhbayuprabowo](https://www.linkedin.com/in/reza-hidayat-bayu-prabowo/)
 
 
 ### All credit to ###
