@@ -2,8 +2,11 @@
 
 [![Made with XNA](https://img.shields.io/badge/Made%20with-XNA%204.0-blue.svg)](https://en.wikipedia.org/wiki/Microsoft_XNA)
 [![VS2015](https://img.shields.io/badge/Visual%20Studio-2015-purple.svg)](https://visualstudio.microsoft.com/)
+[![VB.NET](https://img.shields.io/badge/Language-VB.NET-blue.svg)](https://docs.microsoft.com/en-us/dotnet/visual-basic/)
+[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.0-orange.svg)](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Complete](https://img.shields.io/badge/Status-Complete-green.svg)]()
+[![Last Commit](https://img.shields.io/badge/Last%20Update-December%202023-brightgreen.svg)]()
 
 ## 📖 Overview
 
@@ -32,6 +35,19 @@ Summy is an innovative mathematical board game inspired by Scrabble, developed a
 
 ![Gameplay](https://bitbucket.org/repo/GjRnop/images/807773152-Gameplay.png)
 *Gameplay - Create mathematical expressions to score points*
+
+## 🎮 Game Controls
+
+### Keyboard Controls
+- **Arrow Keys**: Navigate the board
+- **Enter/Space**: Place tile/Confirm action
+- **Esc**: Cancel action/Return to menu
+- **Tab**: Switch between number and operator mode
+
+### Mouse Controls
+- **Left Click**: Select tile/Place tile
+- **Right Click**: Cancel selection
+- **Mouse Wheel**: Rotate through available tiles
 
 ## 🚀 Getting Started
 
@@ -65,6 +81,34 @@ Before running the game, ensure you have installed:
 3. Open `Summy.sln` in Visual Studio 2015
 4. Build the solution (F5 or Ctrl+F5)
 
+## 💻 Development Setup
+
+### Development Prerequisites
+- Visual Studio 2015 Community/Professional/Enterprise
+- Windows SDK (included with Visual Studio)
+- Git for version control
+
+### Setting Up Development Environment
+1. **Install Visual Studio 2015**
+   - Enable Visual Basic development workload
+   - Include .NET Framework 4.0 development tools
+
+2. **Install XNA Framework**
+   - Download XNA Game Studio 4.0
+   - Install all XNA components mentioned in prerequisites
+   - Configure Visual Studio for XNA development
+
+3. **Configure Project**
+   - Open Visual Studio as Administrator (first time setup)
+   - Set platform target to x86
+   - Ensure all NuGet packages are restored
+
+### Debugging Tips
+- Use Debug mode for development
+- Enable break on exceptions
+- Use Visual Studio's built-in debugger for runtime inspection
+- Check Output window for XNA-specific messages
+
 ## 🎯 How to Play
 
 1. **Starting the Game**
@@ -87,6 +131,39 @@ Before running the game, ensure you have installed:
    - Game ends when no more valid moves are possible
    - Player with the highest score wins
 
+## ❗ Troubleshooting
+
+### Common Issues and Solutions
+
+1. **Game Fails to Start**
+   - Verify XNA Framework 4.0 is properly installed
+   - Run Visual Studio as Administrator
+   - Check Windows compatibility settings
+
+2. **Build Errors**
+   - Clean and rebuild the solution
+   - Restore NuGet packages
+   - Verify .NET Framework 4.0 is installed
+
+3. **Graphics Issues**
+   - Update DirectX
+   - Verify graphics card supports Shader Model 2.0
+   - Check display settings
+
+4. **Performance Issues**
+   - Close background applications
+   - Update graphics drivers
+   - Verify system meets minimum requirements
+
+### Getting Help
+If you encounter issues not covered here:
+1. Check existing GitHub issues
+2. Create a new issue with:
+   - Detailed description of the problem
+   - Steps to reproduce
+   - System specifications
+   - Error messages/screenshots
+
 ## 🛠️ Technical Details
 
 ### Project Structure
@@ -102,7 +179,8 @@ summy/
 - Visual Studio 2015
 - XNA Framework 4.0
 - DirectX
-- C# Programming Language
+- Visual Basic .NET (VB.NET)
+- .NET Framework 4.0
 
 ## 👥 Contributing
 
