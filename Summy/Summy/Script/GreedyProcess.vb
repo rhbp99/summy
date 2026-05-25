@@ -38,6 +38,25 @@ Class GreedyProcess
         Return TipeList
     End Function
 
+    ''' <summary>
+    ''' Thread entry point for horizontal candidate arrangement (used by ScreenGameplay).
+    ''' Delegates to SusunKandidatParalelDanSetUpHasil is not applicable here;
+    ''' this stub exists so ScreenGameplay compiles. The actual CPU logic in GamePlayScreen
+    ''' uses the parallel version directly.
+    ''' </summary>
+    Friend Sub SusubKandidatHorizontal(Data As Object)
+        ' Stub: ScreenGameplay uses this as a Thread delegate.
+        ' The active CPU AI path in GamePlayScreen uses SusunKandidatParalelDanSetUpHasil.
+    End Sub
+
+    ''' <summary>
+    ''' Thread entry point for vertical candidate arrangement (used by ScreenGameplay).
+    ''' </summary>
+    Friend Sub SusunKandidatVertikal(Data As Object)
+        ' Stub: ScreenGameplay uses this as a Thread delegate.
+        ' The active CPU AI path in GamePlayScreen uses SusunKandidatParalelDanSetUpHasil.
+    End Sub
+
     Friend Sub SusunKandidatParalelDanSetUpHasil(Data() As String, KandidatSource As GamePlay.KandidatCPUBaseKoordinat, Kpbntu As List(Of Vector2), IsHorizontal As Boolean, TileYangDipegang As TileBoard(), TileBoard As TileBoard(,), loopState As ParallelLoopState)
         Dim TempData = Data
         If AktifCPU AndAlso Not CPUPlaceSet AndAlso CInt(TimeSpan.FromSeconds(WaktuTungguBerjalan).ToString("mm")) < BatasWaktuTunggu Then

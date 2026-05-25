@@ -1,25 +1,26 @@
 ﻿Imports Summy
 
 Friend Class TileBoard
+    Implements IBaseTile
 #Region "Deklarasi Properti"
-    Friend Property Size As Sizes
+    Friend Property Size As Sizes Implements IBaseTile.Size
     Friend Property Position As Vector2
-    Friend Property Value As UShort
+    Friend Property Value As UShort Implements IBaseTile.Value
     Friend Property Colorback As Color
-    Friend Property IsBlocked As Boolean
-    Friend Property IsActive As Boolean
-    Friend Property IsWrongPlace As BenarSalahNetral
-    Friend Property TrigerByOnTop As Boolean
-    Friend Property TrigerByHold As Boolean
+    Friend Property IsBlocked As Boolean Implements IBaseTile.IsBlocked
+    Friend Property IsActive As Boolean Implements IBaseTile.IsActive
+    Friend Property IsWrongPlace As BenarSalahNetral Implements IBaseTile.IsWrongPlace
+    Friend Property TrigerByOnTop As Boolean Implements IBaseTile.TrigerByOnTop
+    Friend Property TrigerByHold As Boolean Implements IBaseTile.TrigerByHold
     Friend Property TrigerByRelease As Boolean
     Friend Property IsOpen As Boolean
     Friend Property IsDeadH As Boolean
     Friend Property IsDeadV As Boolean
-    Friend Property IsCheckedH As Boolean
-    Friend Property IsCheckedV As Boolean
+    Friend Property IsCheckedH As Boolean Implements IBaseTile.IsCheckedH
+    Friend Property IsCheckedV As Boolean Implements IBaseTile.IsCheckedV
     Friend Property IsHighlighted As Boolean = False
     Friend Property IsTrigerAnimation As Boolean = False
-    Private AmountColorRO As Single = 1
+    Friend Property AmountColorRO As Single = 1 Implements IBaseTile.AmountColorRO
     Private AmountColor As Single
     Private AmountColorR As Single = 1
     Private AmountSize As Single = 0
@@ -38,6 +39,13 @@ Friend Class TileBoard
         Board
     End Enum
 #End Region
+
+    ''' <summary>
+    ''' 5-parameter constructor overload used by ScreenGameplay (defaults Owned to Board).
+    ''' </summary>
+    Friend Sub New(Position As Vector2, Size As Sizes, Colorback As Color, Active As Boolean, Value As UShort)
+        Me.New(Position, Size, Colorback, Active, Value, Own.Board)
+    End Sub
 
     Friend Sub New(Position As Vector2, Size As Sizes, Colorback As Color, Active As Boolean, Value As UShort, Owned As Own)
         Me.Position = Position
@@ -288,7 +296,7 @@ Friend Class TileBoard
         End Select
     End Function
 
-    Friend ReadOnly Property CharValue As Char
+    Friend ReadOnly Property CharValue As Char Implements IBaseTile.CharValue
         Get
             Select Case Value
                 Case 0 To 7
@@ -356,6 +364,24 @@ Friend Class TileBoard
                 End If
             End If
         End If
+    End Sub
+
+    ''' <summary>
+    ''' 2-parameter Draw overload implementing IBaseTile (used by ScreenGameplay).
+    ''' Draws the tile background only (no font/shadow textures available).
+    ''' </summary>
+    Friend Sub Draw(BaseTexture As Texture2D, ContentTexture As Texture2D) Implements IBaseTile.Draw
+        ' Minimal draw: render the base tile without font or shadow
+        Dim posisi As Vector2 = Position
+        Sprite.Draw(BaseTexture, New Rectangle(posisi.X, posisi.Y, Size.Width, Size.Height), New Rectangle(0, 0, BaseTexture.Width, BaseTexture.Height), Colorback, 0, New Vector2(BaseTexture.Width / 2, BaseTexture.Height / 2), SpriteEffects.None, 0)
+    End Sub
+
+    ''' <summary>
+    ''' 3-parameter Update overload implementing IBaseTile (used by ScreenGameplay).
+    ''' Calls the full Update with default Giliran/FasePlayer values.
+    ''' </summary>
+    Friend Sub Update(ByRef MouseIsHolding As Boolean, ByRef ValueOfHolding As UShort, ByRef ReleaseOnTile As Boolean) Implements IBaseTile.Update
+        Update(MouseIsHolding, ValueOfHolding, ReleaseOnTile, GamePlay.PlayerTurn.Human, GamePlay.PhasePlayer.Running)
     End Sub
 
 #End Region

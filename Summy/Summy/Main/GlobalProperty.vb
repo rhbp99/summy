@@ -23,6 +23,11 @@
     Friend ReadOnly BatasWaktuTunggu As Integer = 5
     Friend WaktuTungguBerjalan As Single = 0
     Friend WarnaBackground As Single = 0F
+    ' Legacy debug strings used by ScreenGameplay (older gameplay screen)
+    Friend CPUHString As String = ""
+    Friend CPUVString As String = ""
+    ' Shared tile size used by ScreenGameplay
+    Friend UkuranTile As Sizes = New Sizes(0, 0)
 
     Friend Sub GantiWarnaBackground(ByVal GiliranPlayer As GamePlay.PlayerTurn)
         If GiliranPlayer = GamePlay.PlayerTurn.CPU Then

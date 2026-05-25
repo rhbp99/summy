@@ -48,6 +48,23 @@ Friend Class TileMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' 2-parameter Draw overload used by ScreenGameplay (no shadow/font textures available).
+    ''' </summary>
+    Friend Sub Draw(BaseTexture As Texture2D, ContentTexture As Texture2D)
+        Sprite.Draw(BaseTexture, New Rectangle(Position.X, Position.Y, Size.Width + AmountUkuran, Size.Height + AmountUkuran), New Rectangle(0, 0, BaseTexture.Width, BaseTexture.Height), New Color(117, 117, 117), 0, New Vector2(BaseTexture.Width / 2, BaseTexture.Height / 2), SpriteEffects.None, 0)
+        Sprite.Draw(ContentTexture, New Rectangle(Position.X, Position.Y, 0.75 * Size.Width + AmountUkuran, 0.75 * Size.Height + AmountUkuran), New Rectangle(0, 0, ContentTexture.Width, ContentTexture.Height), Color.White, 0, New Vector2(ContentTexture.Width / 2, ContentTexture.Height / 2), SpriteEffects.None, 0)
+    End Sub
+
+    ''' <summary>
+    ''' 1-parameter Update overload used by ScreenGameplay (passes a UInt16 menu index).
+    ''' </summary>
+    Friend Sub Update(ByRef ProsesMenuYangDipilih As UInt16)
+        Dim menuEnum As Menus = CType(CInt(ProsesMenuYangDipilih), Menus)
+        Update(menuEnum, False, 0, False, GamePlay.PlayerTurn.Human, GamePlay.PhasePlayer.Running)
+        ProsesMenuYangDipilih = CUShort(menuEnum)
+    End Sub
+
     Friend Sub Update(ByRef ProsesMenuYangDipilih As Menus, ByVal MouseIsHolding As Boolean, ByRef ValueOfHolding As UShort, ByRef DeleteOnTile As Boolean, ByVal Giliran As GamePlay.PlayerTurn, ByVal FasePlayer As GamePlay.PhasePlayer)
         If New Rectangle(Position.X - Size.Width / 2, Position.Y - Size.Height / 2, Size.Width, Size.Height).Contains(MouseStateBefore.X, MouseStateBefore.Y) And Giliran = GamePlay.PlayerTurn.Human And (FasePlayer = GamePlay.PhasePlayer.Running Or FasePlayer = GamePlay.PhasePlayer.Finish) Then
             TrigerByOnTop = True

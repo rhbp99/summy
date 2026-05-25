@@ -23,11 +23,8 @@ Friend Class MainGame
     ''' and initialize them as well.
     ''' </summary>
     Protected Overrides Sub Initialize()
-        Dim hWnd As IntPtr = Window.Handle
-        Dim control = Windows.Forms.Control.FromHandle(hWnd)
-        Dim form = control.FindForm()
-        form.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        form.WindowState = Windows.Forms.FormWindowState.Maximized
+        Window.IsBorderless = False
+        Window.AllowUserResizing = False
 
         IsFixedTimeStep = True
         graphics.SynchronizeWithVerticalRetrace = True
