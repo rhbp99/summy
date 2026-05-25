@@ -1,222 +1,230 @@
 # Summy
 
-[![Made with XNA](https://img.shields.io/badge/Made%20with-XNA%204.0-blue.svg)](https://en.wikipedia.org/wiki/Microsoft_XNA)
-[![VS2015](https://img.shields.io/badge/Visual%20Studio-2015-purple.svg)](https://visualstudio.microsoft.com/)
+[![Made with MonoGame](https://img.shields.io/badge/Made%20with-MonoGame%203.8.1-blue.svg)](https://www.monogame.net/)
 [![VB.NET](https://img.shields.io/badge/Language-VB.NET-blue.svg)](https://docs.microsoft.com/en-us/dotnet/visual-basic/)
-[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.0-orange.svg)](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
+[![.NET 8](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Complete](https://img.shields.io/badge/Status-Complete-green.svg)]()
-[![Last Commit](https://img.shields.io/badge/Last%20Update-December%202023-brightgreen.svg)]()
 
 ## 📖 Overview
 
-Summy is an innovative mathematical board game inspired by Scrabble, developed as a digital adaptation of Corné van Moorsel's original concept. In this engaging multiplayer game, players create mathematical expressions using numbers and arithmetic operators instead of words, offering a unique blend of strategic thinking and mathematical skills.
+Summy is a mathematical board game inspired by Scrabble, developed as a digital adaptation of Corné van Moorsel's original concept. Players create mathematical expressions using numbers and arithmetic operators instead of words, combining strategic thinking with mathematical skills.
+
+The project was originally built with XNA 4.0 and has since been migrated to **MonoGame 3.8.1** targeting **.NET 8.0**, making it buildable with modern tooling without any legacy XNA installation.
 
 ### 🎮 Game Features
 
-- **Multiplayer Experience**: Support for 2 or more players
-- **Mathematical Gameplay**: Create expressions using:
-  - Addition (+)
-  - Subtraction (-)
-  - Multiplication (×)
-  - Division (÷)
-- **Scoring System**: Points based on the numbers used in valid expressions
-- **Interactive Board**: Classic board game style interface
-- **Tutorial System**: Built-in help and game rules
-- **Visual Feedback**: Clear indication of valid moves and scores
+- **1 vs CPU**: Play against a CPU opponent powered by a greedy AI algorithm
+- **Mathematical Gameplay**: Create valid expressions using:
+  - Addition (`+`)
+  - Subtraction (`-`)
+  - Multiplication (`x`)
+  - Division (`:`)
+- **25×25 Board**: Tile-based board where expressions are placed horizontally or vertically
+- **Scoring System**: Points are calculated from the sum of digit values in valid expressions
+- **Swap & Skip**: Each player has limited swap and skip chances
+- **Pause Menu**: Pause mid-game with options to resume, restart, or return to main menu
+- **Help Screen**: Multi-page in-game tutorial with slide navigation
+- **About Screen**: Version info and credits
+- **FPS Counter**: Built-in debug FPS display
 
 ## 📸 Screenshots
 
 ![Main Menu](https://bitbucket.org/repo/GjRnop/images/1257416750-MainMenu.png)
-*Main Menu - Start your mathematical adventure*
+*Main Menu*
 
 ![Help Screen](https://bitbucket.org/repo/GjRnop/images/3493031165-Bantuan.png)
-*Tutorial Screen - Learn game mechanics and rules*
+*Tutorial Screen*
 
 ![Gameplay](https://bitbucket.org/repo/GjRnop/images/807773152-Gameplay.png)
-*Gameplay - Create mathematical expressions to score points*
+*Gameplay*
 
 ## 🎮 Game Controls
 
-### Keyboard Controls
-- **Arrow Keys**: Navigate the board
-- **Enter/Space**: Place tile/Confirm action
-- **Esc**: Cancel action/Return to menu
-- **Tab**: Switch between number and operator mode
-
 ### Mouse Controls
-- **Left Click**: Select tile/Place tile
-- **Right Click**: Cancel selection
-- **Mouse Wheel**: Rotate through available tiles
+- **Left Click + Drag**: Pick up and place a tile
+- **Left Click on Menu Button**: Confirm action (Swap / Clear / Done)
+- **Left Click on Exit Button**: Toggle pause menu
+
+### Keyboard Controls
+- **Esc**: Toggle pause menu during gameplay / close overlay in main menu
+- **Left / Right Arrow**: Navigate help pages in the tutorial screen
 
 ## 🚀 Getting Started
 
 ### System Requirements
 
-- Windows 7 or later
-- .NET Framework 4.0 or higher
-- DirectX 9.0c or higher
-- 2GB RAM minimum
-- Graphics card supporting Shader Model 2.0
+- Windows 10 or later
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- DirectX 11 compatible GPU
 
-### Prerequisites
+> No XNA Framework or Visual Studio required. The project builds entirely with the standard `dotnet` CLI.
 
-Before running the game, ensure you have installed:
-1. Visual Studio 2015
-2. DirectX End-User Runtime
-3. XNA Framework 4.0 Redistributable
-4. XNA Game Studio 4.0 Platform Tools
-5. XNA Game Studio 4.0 Shared
-6. XNA Game Studio 4.0.vsix
+### Quick Start (CLI)
 
-### Installation Steps
+```bash
+git clone <repository-url>
+cd summy/Summy/Summy
 
-1. Clone the repository:
-   ```bash
-   git clone [repository-url]
-   ```
-2. Install XNA Framework for Visual Studio 2015:
-   - Download from [XNA For Visual Studio 2015](https://flatredball.com/visual-studio-2019-xna-setup/)
-   - Follow the installation wizard
-3. Open `Summy.sln` in Visual Studio 2015
-4. Build the solution (F5 or Ctrl+F5)
+# Restore the local mgcb content tool (only needed once)
+dotnet tool restore
+
+# Build and run
+dotnet run
+```
+
+> **Important:** all `dotnet` commands must be run from `Summy/Summy/` (the directory containing `Summy.vbproj` and `dotnet-tools.json`), not from the repo root or the `Summy/` solution folder.
+
+### What happens during build
+
+1. `dotnet build` restores NuGet packages (`MonoGame.Framework.WindowsDX` and `MonoGame.Content.Builder.Task`)
+2. `MonoGame.Content.Builder.Task` invokes the local `mgcb` tool to compile all assets declared in `Content/Content.mgcb`
+3. Raw assets are read from `Summy/SummyContent/` (PNG textures + `Debug.spritefont`) and compiled to `bin/Windows/Debug/Content/`
+4. The compiled binary is placed in `bin/Debug/net8.0-windows/Summy.exe`
+
+### Build for Release
+
+```bash
+dotnet publish -c Release
+```
+
+Output will be in `bin/Release/net8.0-windows/publish/`.
 
 ## 💻 Development Setup
 
-### Development Prerequisites
-- Visual Studio 2015 Community/Professional/Enterprise
-- Windows SDK (included with Visual Studio)
-- Git for version control
+### Recommended Tools
+- Visual Studio 2022 with the **Visual Basic** workload, or VS Code with the **C# Dev Kit** extension
+- .NET 8.0 SDK
 
-### Setting Up Development Environment
-1. **Install Visual Studio 2015**
-   - Enable Visual Basic development workload
-   - Include .NET Framework 4.0 development tools
+### Opening the Project in Visual Studio 2022
 
-2. **Install XNA Framework**
-   - Download XNA Game Studio 4.0
-   - Install all XNA components mentioned in prerequisites
-   - Configure Visual Studio for XNA development
+> ⚠️ Do **not** open `Summy.sln` — it is a legacy VS2015 solution file that still references the old `SummyContent.contentproj` and will not build correctly. Open the project file directly instead.
 
-3. **Configure Project**
-   - Open Visual Studio as Administrator (first time setup)
-   - Set platform target to x86
-   - Ensure all NuGet packages are restored
+1. Clone the repository
+2. In Visual Studio 2022: **File → Open → Project/Solution** → select `Summy/Summy/Summy.vbproj`
+3. Open a terminal in the `Summy/Summy/` directory and run `dotnet tool restore` once to install the local `mgcb` tool
+4. Press **F5** to build and run
 
-### Debugging Tips
-- Use Debug mode for development
-- Enable break on exceptions
-- Use Visual Studio's built-in debugger for runtime inspection
-- Check Output window for XNA-specific messages
+### Opening the Project in VS Code
+
+1. Install the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) extension
+2. Open the `Summy/Summy/` folder (not the repo root)
+3. Run `dotnet tool restore` in the integrated terminal
+4. Use `dotnet run` to build and launch
+
+### Project Configuration
+
+| Property | Value |
+|---|---|
+| Target Framework | `net8.0-windows` |
+| Platform | `AnyCPU` |
+| Output Type | `WinExe` |
+| Resolution | Fixed 1366×768 |
+| VSync | Enabled (fixed time step) |
+| Content Pipeline | MonoGame MGCB 3.8.1.303 |
+| Content Profile | Reach |
+
+### Content Pipeline Notes
+
+Raw assets live in `Summy/SummyContent/` and are referenced by `Content/Content.mgcb` using relative paths (`../../SummyContent/...`). The `mgcb` tool compiles them to `bin/Windows/$(Configuration)/Content/` at build time. You do not need to run `mgcb` manually — it is invoked automatically by `MonoGame.Content.Builder.Task` during `dotnet build`.
+
+If you add new assets:
+1. Place the file in `Summy/SummyContent/gfx/` (or the root for fonts)
+2. Add a corresponding `/build` entry in `Content/Content.mgcb`
+3. Load it in code via `ContentManager.Load(Of Texture2D)("gfx/your-asset")`
+
+### Troubleshooting
+
+| Problem | Solution |
+|---|---|
+| `mgcb: command not found` | Run `dotnet tool restore` from `Summy/Summy/` |
+| Content not found at runtime | Ensure the asset is listed in `Content.mgcb` and the build succeeded without errors |
+| Build fails with `net8.0-windows` target | Confirm you are on Windows and have the .NET 8 SDK installed (`dotnet --version`) |
+| VS2022 shows errors after opening `.sln` | Open `Summy.vbproj` directly instead of the solution file |
 
 ## 🎯 How to Play
 
-1. **Starting the Game**
-   - Launch the game
-   - Select number of players
-   - Each player gets a set of number tiles and operators
+1. **Start the Game** — Launch and click **Main** from the main menu
+2. **Turn Order** — Turn order between Human and CPU is randomized at the start
+3. **Place Tiles** — Drag tiles from your hand onto the board to form a valid mathematical expression (e.g. `3+4=7`)
+4. **Valid Expressions** — Expressions must follow the form `A op B = C` and be mathematically correct. Operator precedence (`x`, `:` before `+`, `-`) is respected
+5. **Confirm Move** — Click the **Done** button to submit your move and score points
+6. **Swap** — Use the **Swap** button to exchange your tiles (limited uses)
+7. **Clear** — Use the **Clear** button to take back tiles you placed this turn
+8. **Game End** — The game ends when the tile stack is empty and both players have exhausted their skip chances. The player with the highest score wins
 
-2. **Gameplay Rules**
-   - Players take turns placing numbers and operators on the board
-   - Create valid mathematical expressions
-   - Expressions can be formed horizontally or vertically
-   - All connected numbers and operators must form valid equations
+### Scoring
+Points for a move equal the sum of all digit values in the expression placed (e.g. `3+4=7` scores 3+4+7 = 14).
 
-3. **Scoring**
-   - Points are awarded based on the numbers used in expressions
-   - Bonus points for complex expressions
-   - Invalid expressions are not counted
+## 🤖 CPU AI
 
-4. **Winning**
-   - Game ends when no more valid moves are possible
-   - Player with the highest score wins
-
-## ❗ Troubleshooting
-
-### Common Issues and Solutions
-
-1. **Game Fails to Start**
-   - Verify XNA Framework 4.0 is properly installed
-   - Run Visual Studio as Administrator
-   - Check Windows compatibility settings
-
-2. **Build Errors**
-   - Clean and rebuild the solution
-   - Restore NuGet packages
-   - Verify .NET Framework 4.0 is installed
-
-3. **Graphics Issues**
-   - Update DirectX
-   - Verify graphics card supports Shader Model 2.0
-   - Check display settings
-
-4. **Performance Issues**
-   - Close background applications
-   - Update graphics drivers
-   - Verify system meets minimum requirements
-
-### Getting Help
-If you encounter issues not covered here:
-1. Check existing GitHub issues
-2. Create a new issue with:
-   - Detailed description of the problem
-   - Steps to reproduce
-   - System specifications
-   - Error messages/screenshots
+The CPU uses a **greedy algorithm** (`GreedyProcess.vb`) that runs on a background thread using `Parallel.ForEach`. It:
+- Generates permutations of tiles in the CPU's hand
+- Tests each permutation against all four operators
+- Validates placement against existing tiles on the board
+- Places the first valid solution found within a configurable time limit (default: 5 minutes)
 
 ## 🛠️ Technical Details
 
 ### Project Structure
 ```
 summy/
-├── Summy/              # Main game project
-├── SummyContent/       # Game assets and content
-├── Summy.sln          # Solution file
-└── XnaForVS2019/      # XNA Framework support files
+├── Summy/
+│   └── Summy/
+│       ├── Base/               # Interfaces and base classes (IBaseScreen, TileBoard, TileMenu, etc.)
+│       ├── Content/            # MonoGame content pipeline (Content.mgcb, compiled assets)
+│       ├── Main/               # Entry point, GlobalProperty module, MainGame class
+│       ├── Screen/             # Game screens (MenuUtamaScreen, GamePlayScreen, BackgroundGamePlayScreen)
+│       ├── Script/             # Game logic (Bahasa, GreedyProcess, FPSCounter, CekSemuaKotak)
+│       ├── My Project/         # Assembly info
+│       └── Summy.vbproj        # Project file
+├── SummyContent/               # Raw content assets (textures, fonts)
+└── README.md
 ```
 
+### Key Components
+
+| File | Description |
+|---|---|
+| `Main/MainGame.vb` | Main `Game` class; manages screen stack and game loop |
+| `Main/GlobalProperty.vb` | Shared global state (input, timing, CPU flags) |
+| `Base/TileBoard.vb` | Board tile model and rendering |
+| `Base/TileMenu.vb` | Action menu tile (Swap, Clear, Done) |
+| `Base/Screens.vb` | Abstract base class for all screens |
+| `Screen/GamePlayScreen.vb` | Core gameplay logic, player/CPU turn management, board validation |
+| `Screen/MenuUtamaScreen.vb` | Main menu, help, and about screens |
+| `Script/Bahasa.vb` | Expression parser and validator (syntax + arithmetic correctness) |
+| `Script/GreedyProcess.vb` | CPU AI — permutation-based greedy solver |
+| `Script/FPSCounter.vb` | Debug FPS overlay |
+
 ### Built With
-- Visual Studio 2015
-- XNA Framework 4.0
-- DirectX
-- Visual Basic .NET (VB.NET)
-- .NET Framework 4.0
+- [MonoGame 3.8.1](https://www.monogame.net/) (WindowsDX backend)
+- VB.NET / .NET 8.0
+- MonoGame Content Builder (`mgcb`) for asset pipeline
 
 ## 👥 Contributing
 
-We welcome contributions! Here's how you can help:
-
-1. **Fork the Repository**
-2. **Create a Branch**
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. **Make Changes**
-4. **Test**
-   - Ensure your changes don't break existing functionality
-   - Add new tests if necessary
-5. **Submit Pull Request**
-   - Describe your changes in detail
-   - Reference any related issues
+1. Fork the repository
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Make your changes and build: `dotnet build`
+4. Submit a pull request with a clear description of the change
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-## 📧 Contact & Support
+## 📧 Contact
 
 - **Developer**: [Reza Hidayat Bayu Prabowo](https://www.linkedin.com/in/reza-hidayat-bayu-prabowo/)
-- **Issues**: Create an issue in this repository
-- **Email**: Contact through LinkedIn
+- **Email**: rh.bayu.prabowo@outlook.com
 
 ## 🙏 Acknowledgments
 
 - Original Game Concept: [Corné van Moorsel](http://www.cwali.nl/summy/summy.htm)
-- USU Computer Science Department
-- Project Supervisors
-- Microsoft XNA Community
-- All contributors and testers
+- USU Computer Science Department & Project Supervisors
+- Font: **PixelDust** — Copyright © Andreas Nylin
+- Icons: **Material Design** — Copyright © Google
 
 ## 📌 Project Status
 
-This project was completed as a final requirement for the Computer Science Bachelor's Degree program at Universitas Sumatera Utara (USU). While the main development is complete, we welcome community contributions for improvements and bug fixes.
+Completed as a final requirement for the Computer Science Bachelor's Degree program at Universitas Sumatera Utara (USU). The codebase has been migrated from XNA 4.0 to MonoGame 3.8.1 / .NET 8.0. Community contributions for improvements and bug fixes are welcome.
